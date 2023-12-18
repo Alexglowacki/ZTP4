@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Management App</title>
+</head>
+{% comment %} TODO from edit --> details {% endcomment %}
+<body>
+    <h1>Welcome to product details view</h1>
+    <div>
+        <form action="{{ url_for('product.edit_product') }}" method="get">
+            <label for="product_name">Product name:</label>
+            <label for="product_amount">Product amount:</label>
+            <label for="product_price">Product price:</label>
+            <label for="product_description">Product description:</label>
+            <label for="product_status">Product status:</label>
+
+            <a href="{{ urlfor('product.index')}}">
+                <button type="submit">OK - go back</button>
+            </a>
+        </form>
+    </div>
+</body>
+</html>

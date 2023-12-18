@@ -1,8 +1,11 @@
-import tkinter as tk
 import requests
 
 from bson import ObjectId
+
+# change from tkinter to Flask
 from tkinter import ttk
+import tkinter as tk
+
 from controllers.productController import ProductController
 from views.viewDetails import ProductDetailsView
 from views.viewAdd import ProductAddView

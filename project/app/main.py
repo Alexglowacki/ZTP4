@@ -10,8 +10,8 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
+controller = ProductController()
+# view = ProductView(app, controller)
 
-view_model = ProductController()
-view = ProductView(app, view_model)
-
-app.mainloop()
+if __name__ == '__main__':
+    app.run(debug=True)

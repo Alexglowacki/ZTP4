@@ -2,9 +2,9 @@ from flask import Flask
 from flask_restful import Api, Resource
 from flask import Response
 
-from api.resources import database_connection
+from api import database_connection
 from models import product_model
-from api.resources import database_operations
+from api import database_operations
 
 app = Flask(__name__)
 api = Api(app)
