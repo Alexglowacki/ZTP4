@@ -6,36 +6,26 @@
     <title>Product Management App</title>
 </head>
 <body>
-    <h1>Welcome to the Product Management App</h1>
+    <h1>Main menu</h1>
 
     <div>
-        {% comment %} Add product button {% endcomment %}
-        <a href="{{ url_for('product.add_product') }}">
-            <button>Add Product</button>
+        <a href="{{ '/list'}}">
+            Go to product List
         </a>
 
-        {% comment %} This is the main view - List products view{% endcomment %}
-        <a href="{{ url_for('product.get_products') }}">
-            <button>List Products</button>
+        <a href="{{ '/add'}}">
+            Add products
+        </a>
+        <!-- add delete in edit tempate -->
+        <a href="{{ '/edit'}}">
+            Edit products
         </a>
 
-        {% comment %} Details product button {% endcomment %}
-        <!-- Replace 'product_id' with the actual variable used in your route -->
-        <a href="{{ url_for('product.get_product_details', product_id=1) }}">
-            <button>Get Details of Product</button>
+        <a href="{{ '/details'}}">
+            See product details
         </a>
 
-        {% comment %} Delete product button {% endcomment %}
-        <!-- Replace 'product_id' with the actual variable used in your route -->
-        <a href="{{ url_for('product.delete_product', product_id=1) }}">
-            <button>Delete Product</button>
-        </a>
-        
-        {% comment %} Edit product button - go to edit view{% endcomment %}
-        <!-- Replace 'product_id' with the actual variable used in your route -->
-        <a href="{{ url_for('product.edit_product', product_id=1) }}">
-            <button>Edit Products</button>
-        </a>
+
     </div>
 </body>
 </html>
