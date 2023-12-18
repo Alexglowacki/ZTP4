@@ -3,7 +3,7 @@
 
 # Struktura:
  - warstwa aplikacji - folder app/ui - odpowiedzialne za frontend
- - warstwa domenowa - plik viewModel.py - odpowiedzialne za logikę biznesową
+ - warstwa domenowa - plik controller.py - odpowiedzialne za logikę biznesową
  - wartswa infrastrukturalna - API wszystko w folderze /app/api, /app/models odpowiedzialne za polaczenia z baza danych
 
 # MVC:

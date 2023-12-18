@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Management App</title>
+</head>
+<body>
+    <h1>Welcome to the Product Management App</h1>
+
+    <div>
+        {% comment %} Add product button {% endcomment %}
+        <a href="{{ url_for('product.add_product') }}">
+            <button>Add Product</button>
+        </a>
+
+        {% comment %} This is the main view - List products view{% endcomment %}
+        <a href="{{ url_for('product.get_products') }}">
+            <button>List Products</button>
+        </a>
+
+        {% comment %} Details product button {% endcomment %}
+        <!-- Replace 'product_id' with the actual variable used in your route -->
+        <a href="{{ url_for('product.get_product_details', product_id=1) }}">
+            <button>Get Details of Product</button>
+        </a>
+
+        {% comment %} Delete product button {% endcomment %}
+        <!-- Replace 'product_id' with the actual variable used in your route -->
+        <a href="{{ url_for('product.delete_product', product_id=1) }}">
+            <button>Delete Product</button>
+        </a>
+        
+        {% comment %} Edit product button {% endcomment %}
+        <!-- Replace 'product_id' with the actual variable used in your route -->
+        <a href="{{ url_for('product.edit_product', product_id=1) }}">
+            <button>Edit Products</button>
+        </a>
+    </div>
+</body>
+</html>

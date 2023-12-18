@@ -11,7 +11,7 @@ api = Api(app)
 
 
 # new resource
-class Products(Resource):
+class ProductController(Resource):
     db = database_connection.connect2db()
 
     product_list = list()
@@ -80,7 +80,7 @@ class Products(Resource):
             return Response(status=500)
 
 
-api.add_resource(Products,
+api.add_resource(ProductController,
                  "/product/<string:id_product>",  # for delete
                  "/product/<string:id_product>/<string:get_one>",  # for get and get list
                  "/product/<string:name>/<int:amount>/<float:price>/<string:description>/<string:status>",  # for post

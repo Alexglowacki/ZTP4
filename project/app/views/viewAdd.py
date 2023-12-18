@@ -1,15 +1,16 @@
+
 import tkinter as tk
 from tkinter import ttk
 from tkinter import messagebox
-from viewModel import Products
+from controllers.productController import ProductController
 
-class ProductEditView:
-    def __init__(self, root, viewModel, product_id):
+
+class ProductAddView:
+    def __init__(self, root, controller):
         self.root = root
-        self.viewModel = viewModel
-        self.product_id = product_id
+        self.controller = controller
 
-        self.root.title("Edit Product")
+        self.root.title("Add Product")
 
         self.label_name = ttk.Label(self.root, text="Product Name:")
         self.label_name.grid(row=0, column=0, padx=10, pady=10, sticky=tk.W)
@@ -36,65 +37,49 @@ class ProductEditView:
         self.entry_status = ttk.Entry(self.root)
         self.entry_status.grid(row=4, column=1, padx=10, pady=10, sticky=tk.W)
 
-        self.button_add = ttk.Button(self.root, text="Save Changes", command=self.save_changes)
+        self.button_add = ttk.Button(self.root, text="Add Product", command=self.add_product)
         self.button_add.grid(row=5, column=0, columnspan=2, pady=10)
 
-        self.populate_fields()
+    def add_product(self):
+        name = self.entry_name.get()
+        amount = self.entry_amount.get()
+        price = self.entry_price.get()
+        description = self.entry_description.get()
+        status = self.entry_status.get()
 
-    def populate_fields(self):
-        self.viewModel.get(self.product_id, "True")
-        details = self.viewModel.product
-        if 'message' in details:
-            tk.messagebox.showerror("Error", details['message'])
-        else:
-            self.entry_name.insert(0, details['name'])
-            self.entry_amount.insert(0, details['amount'])
-            self.entry_price.insert(0, details['price'])
-            self.entry_description.insert(0, details['description'])
-            self.entry_status.insert(0, details['status'])
-
-    def save_changes(self):
-        new_name = self.entry_name.get()
-        new_amount = self.entry_amount.get()
-        new_price = self.entry_price.get()
-        new_description = self.entry_description.get()
-        new_status = self.entry_status.get()
-
-        update_doc = {"name": new_name,
-                      "amount": new_amount,
-                      "price": new_price,
-                      "description": new_description,
-                      "status": new_status}
+        if not name or not price or not amount or not description or not status:
+            tk.messagebox.showerror("Error", "Please enter values fields.")
+            return
 
         try:
-            new_name = str(new_name)
+            name = str(name)
         except ValueError:
             tk.messagebox.showerror("Error", "Please enter a valid alphabetic name.")
             return
 
         try:
-            new_amount = int(new_amount)
+            amount = int(amount)
         except ValueError:
             tk.messagebox.showerror("Error", "Please enter a valid numeric value for amount.")
             return
 
         try:
-            new_price = float(new_price)
+            price = float(price)
         except ValueError:
             tk.messagebox.showerror("Error", "Please enter a valid numeric value for price.")
             return
 
         try:
-            new_description = str(new_description)
+            description = str(description)
         except ValueError:
             tk.messagebox.showerror("Error", "Please enter a valid alphabetic description.")
             return
 
         try:
-            new_status = str(new_status)
+            status = str(status)
         except ValueError:
             tk.messagebox.showerror("Error", "Please enter a valid alphabetic status.")
             return
-        print(f"DEBUG: {self.product_id}")
-        self.viewModel.put(self.product_id, update_doc)
+
+        self.controller.post(name, amount, price, description, status)
         self.root.destroy()

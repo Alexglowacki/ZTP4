@@ -1,12 +1,12 @@
 import tkinter as tk
 from tkinter import ttk
-from viewModel import Products
+from controllers.productController import ProductController
 
 
 class ProductDetailsView:
-    def __init__(self, root, view_model, product_id):
+    def __init__(self, root, controller, product_id):
         self.root = root
-        self.view_model = view_model
+        self.controller = controller
         self.product_id = product_id
 
         self.root.title("Product Details")
@@ -36,8 +36,8 @@ class ProductDetailsView:
         self.populate_details()
 
     def populate_details(self):
-        self.view_model.get(self.product_id, 'True')
-        details = self.view_model.product
+        self.controller.get(self.product_id, 'True')
+        details = self.controller.product
         if 'message' in details:
             tk.messagebox.showerror("Error", details['message'])
         else:
