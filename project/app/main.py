@@ -9,7 +9,8 @@ controller = ProductController()
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    controller.get("", get_one="False")
+    return render_template('index.html', products=controller.product_list)
 
 
 @app.route('/list')
