@@ -60,9 +60,9 @@
     <h2>Delete product</h2>
     <div>
         <label for="product._id">Enter Product ID: </label>
-        <input type="text" id="product._id" name="_id" required>
+        <input type="text" id="product._id" name="id" required>
         <br>
-        <button type="submit">Delete Product</button>
+        <form action="{{'/product/id'}}" method="delete"><button type="submit">Delete Product</button></form>
     </div>
 
 
@@ -82,7 +82,7 @@
             <!-- TODO implement functioinality -->
             <!-- <th><a href="{{ '/edit/{{product._id}}'}}">Edit</a></th> -->
             <th><a href="{{ '/edit'}}"><button type="submit">Edit</button></a></th>
-            <th><button type="submit">Delete</button></th>
+            <th><form action="{{'/product/product._id'}}"><button type="submit">Delete</button></form></th>
         </tr>
         {% endfor %}
     </table>

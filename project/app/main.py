@@ -30,6 +30,10 @@ def edit():
 def details():
     return render_template('details.html')
 
+
+@app.route('/delete/<string:id>')
+def delete(id):
+    ProductController.delete(id)
 # view = ProductView(app, controller)
 
 if __name__ == '__main__':
