@@ -18,23 +18,58 @@
     <h1>Main menu</h1>
     <h2>Add product</h2>
     <div>
-        <label for="product.name">Enter Product Name:      </label>
-        <input type="text" id="product.name" name="name" required>
+        <label for="product_name">Enter Product Name: </label>
+        <input type="text" id="product_name" name="name" required>
         <br>
-        <label for="product.amount">Enter Product Amount:</label>
-        <input type="number" id="product.amount" name="amount" required>
+        <label for="product_amount">Enter Product Amount:</label>
+        <input type="number" id="product_amount" name="amount" required>
         <br>
-        <label for="product.price">Enter Product Price:</label>
-        <input type="number" id="product.price" name="price" required>
+        <label for="product_price">Enter Product Price:</label>
+        <input type="number" id="product_price" name="price" required>
         <br>
-        <label for="product.description">Enter Product Description:</label>
-        <input type="text" id="product.description" name="description" required>
+        <label for="product_description">Enter Product Description:</label>
+        <input type="text" id="product_description" name="description" required>
         <br>
-        <label for="product.status">Enter Product status:</label>
-        <input type="text" id="product.status" name="status" required>
+        <label for="product_status">Enter Product status:</label>
+        <input type="text" id="product_status" name="status" required>
         <br>
-        <button type="submit">Add Product</button>
+        <form id="addForm" action="product/" method="post">
+            <button type="submit">Add Product</button>
+        </form>
+
+        <script>
+            document.getElementById('addForm').addEventListener('submit', function(event) {
+
+                var productName = document.getElementById('product_name').value;
+                var productAmount = document.getElementById('product_amount').value;
+                var productPrice = document.getElementById('product_price').value;
+                var productDescription = document.getElementById('product_description').value;
+                var productStatus = document.getElementById('product_status').value;
+
+                // "product_name/product_amount/product_price/product_description/product_status"
+                this.action = "product/" + productName + "/" + productAmount + "/" + productPrice + "/" + productDescription + "/" + productStatus;
+            });
+        </script>
     </div>
+
+    <h2>Product details</h2>
+    <div>
+        <label for="product_id">Enter Product ID: </label>
+        <input type="text" id="product_id" name="id" required>
+        <br>
+        <form id="detailsForm" action="details/" method="get">
+            <button type="submit">Show Details</button>
+        </form>
+
+        <script>
+            document.getElementById('detailsForm').addEventListener('submit', function(event) {
+                var productId = document.getElementById('product_id').value;
+
+                this.action = "details/" + productId;
+            });
+        </script>
+    </div>
+<!-- TODO -->
     <h2>Edit product</h2>
     <div>
         <label for="product._id">Enter Product ID: </label>
@@ -57,8 +92,7 @@
         <br>
         <button type="submit">Save changes</button>
     </div>
-    <h2>Delete product</h2>
-    </div>
+
     <h2>Delete product</h2>
     <div>
         <label for="product_id">Enter Product ID: </label>
@@ -88,28 +122,27 @@
         </tr>
         {% for product in products %}
         <tr>
-            <!-- <th><a href="{{ '/details/{{product._id}}'}}">{{product._id}}</a></th> -->
-            <th><a href="{{ '/details'}}">{{product._id}}</a></th>
+
+            <th>{{product._id}}</th>
             <th>{{ product.name }}</th>
             <th>${{ product.price }}</th>
-            <!-- TODO implement functioinality -->
-            <!-- <th><a href="{{ '/edit/{{product._id}}'}}">Edit</a></th> -->
-            <!-- <th><a href="{{ '/edit'}}"><button type="submit">Edit</button></a></th> -->
+
+            <!-- <th><a href="{{ '/details'}}"><button type="submit">Details</button></a></th> -->
+            <th>    
+                <form id="detailsForm" action="/details/{{ product._id }}" method="get">
+                    <button type="submit">Details</button>
+                </form>
+                <script>
+                    document.getElementById('detailsForm').addEventListener('submit', function(event) {});
+                </script>
+            </th>
+            <th><a href="{{ '/edit'}}"><button type="submit">Edit</button></a></th>
             <th>    
                 <form id="deleteFromListForm" action="/product/{{ product._id }}" method="get">
                     <button type="submit">Delete</button>
                 </form>
                 <script>
-                    document.getElementById('deleteFromListForm').addEventListener('submit', function(event) {
-                        // No need to get the product ID again, it's already in the form action
-                        // var productListId = document.getElementById('product._id').value;
-                
-                        // If you need to confirm the delete action, you can prompt the user here
-                        // var confirmDelete = confirm("Are you sure you want to delete this product?");
-                        // if (!confirmDelete) {
-                        //     event.preventDefault(); // Cancel the form submission
-                        // }
-                    });
+                    document.getElementById('deleteFromListForm').addEventListener('submit', function(event) {});
                 </script>
             </th>
         </tr>

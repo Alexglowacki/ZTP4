@@ -4,22 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Management App</title>
+    <style>
+        body {
+            background-color: #7c7777; /* Set your desired background color here */
+        }
+    </style>
 </head>
- <!-- TODO from edit -->
+
 <body>
     <h1>Welcome to product details view</h1>
-    <!-- <div>
-        <form action="{{ url_for('product.edit_product') }}" method="get">
-            <label for="product_name">Product name:</label>
-            <label for="product_amount">Product amount:</label>
-            <label for="product_price">Product price:</label>
-            <label for="product_description">Product description:</label>
-            <label for="product_status">Product status:</label>
+    <div>
+        <label for="product_name"><b>Product name</b>: {{product._id}}</label>
+        <br>
+        <label for="product_name"><b>Product name</b>: {{product.name}}</label>
+        <br>
+        <label for="product_amount"><b>Product amount</b>: {{product.amount}}</label>
+        <br>
+        <label for="product_price"><b>Product price</b>: {{product.price}}</label>
+        <br>
+        <label for="product_description"><b>Product description</b>: {{product.description}}</label>
+        <br>
+        <label for="product_status"><b>Product status</b>: {{product.status}}</label>
+        <br>
+        <a href="/">
+            <button type="submit">OK - go back</button>
+        </a>
 
-            <a href="{{ urlfor('product.index')}}">
-                <button type="submit">OK - go back</button>
-            </a>
-        </form>
-    </div> -->
+    </div>
 </body>
 </html>

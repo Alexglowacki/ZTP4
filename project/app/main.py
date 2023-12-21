@@ -13,22 +13,28 @@ def index():
     return render_template('index.html', products=controller.product_list)
 
 
-# @app.route('/list')
-# def list():
-#     controller.get("", get_one="False")
-#     return render_template('list.html', products=controller.product_list)
+@app.route('/product/<string:name>/<int:amount>/<float:price>/<string:description>/<string:status>', methods=['POST'])
+def add(name, amount, price, description, status):
 
-# @app.route('/add')
-# def add():
-#     return render_template('add.html')
+    print(f"DEBUG: {name}\n{amount}\n{price}\n{description}\n{status}")
+    addition = controller.post(name=name,
+                               amount=amount,
+                               price=price,
+                               description=description,
+                               status=status)
+
+    return index()
+
 
 @app.route('/edit')
 def edit():
     return render_template('edit.html')
 
-@app.route('/details')
-def details():
-    return render_template('details.html')
+
+@app.route('/details/<string:id>')
+def details(id):
+    controller.get(id, get_one="True")
+    return render_template('details.html', product=controller.product)
 
 
 @app.route('/product/<string:id>')
@@ -36,7 +42,7 @@ def delete(id):
     deletion = controller.delete(id_product=id)
 
     return index()
-# view = ProductView(app, controller)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
