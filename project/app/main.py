@@ -13,14 +13,14 @@ def index():
     return render_template('index.html', products=controller.product_list)
 
 
-@app.route('/list')
-def list():
-    controller.get("", get_one="False")
-    return render_template('list.html', products=controller.product_list)
+# @app.route('/list')
+# def list():
+#     controller.get("", get_one="False")
+#     return render_template('list.html', products=controller.product_list)
 
-@app.route('/add')
-def add():
-    return render_template('add.html')
+# @app.route('/add')
+# def add():
+#     return render_template('add.html')
 
 @app.route('/edit')
 def edit():
@@ -31,9 +31,11 @@ def details():
     return render_template('details.html')
 
 
-@app.route('/delete/<string:id>')
+@app.route('/product/<string:id>')
 def delete(id):
-    ProductController.delete(id)
+    deletion = controller.delete(id_product=id)
+
+    return index()
 # view = ProductView(app, controller)
 
 if __name__ == '__main__':

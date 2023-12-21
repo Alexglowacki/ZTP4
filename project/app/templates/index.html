@@ -58,12 +58,25 @@
         <button type="submit">Save changes</button>
     </div>
     <h2>Delete product</h2>
-    <div>
-        <label for="product._id">Enter Product ID: </label>
-        <input type="text" id="product._id" name="id" required>
-        <br>
-        <form action="{{'/product/id'}}" method="delete"><button type="submit">Delete Product</button></form>
     </div>
+    <h2>Delete product</h2>
+    <div>
+        <label for="product_id">Enter Product ID: </label>
+        <input type="text" id="product_id" name="id" required>
+        <br>
+        <form id="deleteForm" action="product/" method="get">
+            <button type="submit">Delete</button>
+        </form>
+
+        <script>
+            document.getElementById('deleteForm').addEventListener('submit', function(event) {
+                var productId = document.getElementById('product_id').value;
+
+                this.action = "product/" + productId;
+            });
+        </script>
+    </div>
+
 
 
     <h1>List of products</h1>
@@ -81,8 +94,24 @@
             <th>${{ product.price }}</th>
             <!-- TODO implement functioinality -->
             <!-- <th><a href="{{ '/edit/{{product._id}}'}}">Edit</a></th> -->
-            <th><a href="{{ '/edit'}}"><button type="submit">Edit</button></a></th>
-            <th><form action="{{'/product/product._id'}}"><button type="submit">Delete</button></form></th>
+            <!-- <th><a href="{{ '/edit'}}"><button type="submit">Edit</button></a></th> -->
+            <th>    
+                <form id="deleteFromListForm" action="/product/{{ product._id }}" method="get">
+                    <button type="submit">Delete</button>
+                </form>
+                <script>
+                    document.getElementById('deleteFromListForm').addEventListener('submit', function(event) {
+                        // No need to get the product ID again, it's already in the form action
+                        // var productListId = document.getElementById('product._id').value;
+                
+                        // If you need to confirm the delete action, you can prompt the user here
+                        // var confirmDelete = confirm("Are you sure you want to delete this product?");
+                        // if (!confirmDelete) {
+                        //     event.preventDefault(); // Cancel the form submission
+                        // }
+                    });
+                </script>
+            </th>
         </tr>
         {% endfor %}
     </table>
