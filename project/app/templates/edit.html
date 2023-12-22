@@ -4,30 +4,71 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Management App</title>
+    <style>
+        body {
+            background-color: #7c7777; /* Set your desired background color here */
+        }
+    </style>
 </head>
- TODO from add --> edit 
+
 <body>
     <h1>Welcome to Edit product view</h1>
+
     <div>
-        <h2>Edit a Product</h2>
-        <form action="{{ url_for('product.edit_product') }}" method="put">
-            <label for="product_name">Product name:</label>
-            <input type="text" id="product_name" name="name" required>
-            
-            <label for="product_amount">Product amount:</label>
-            <input type="number" id="product_amount" name="amount" required>
-            
-            <label for="product_price">Product price:</label>
-            <input type="number" id="product_price" name="price" required>
-            
-            <label for="product_description">Product description:</label>
-            <input type="text" id="product_description" name="description" required>
+        <label for="product_name"><b>Product name</b>: {{product._id}}</label>
+        <br>
+        <label for="product_name"><b>Product name</b>: {{product.name}}</label>
+        <br>
+        <label for="product_amount"><b>Product amount</b>: {{product.amount}}</label>
+        <br>
+        <label for="product_price"><b>Product price</b>: {{product.price}}</label>
+        <br>
+        <label for="product_description"><b>Product description</b>: {{product.description}}</label>
+        <br>
+        <label for="product_status"><b>Product status</b>: {{product.status}}</label>
+        <br>
+        <a href="/">
+            <button type="submit">OK - go back</button>
+        </a>
 
-            <label for="product_status">Product status:</label>
-            <input type="text" id="product_status" name="status" required>
+    </div>
 
+    <h2>Edit product</h2>
+    <div>
+        <label for="product_id">Enter Product ID: </label>
+        <input type="text" id="product_id" name="id" required>
+        <br>
+        <label for="product_name">Enter Product Name: </label>
+        <input type="text" id="product_name" name="name" required>
+        <br>
+        <label for="product_amount">Enter Product Amount:</label>
+        <input type="number" id="product_amount" name="amount" required>
+        <br>
+        <label for="product_price">Enter Product Price:</label>
+        <input type="number" id="product_price" name="price" required>
+        <br>
+        <label for="product_description">Enter Product Description:</label>
+        <input type="text" id="product_description" name="description" required>
+        <br>
+        <label for="product_status">Enter Product status:</label>
+        <input type="text" id="product_status" name="status" required>
+        <br>
+        <form id="editForm" action="product/" method="post">
             <button type="submit">Save changes</button>
         </form>
+
+        <script>
+            document.getElementById('editForm').addEventListener('submit', function(event) {
+                var productId = document.getElementById('product_id').value;
+                var productName = document.getElementById('product_name').value;
+                var productAmount = document.getElementById('product_amount').value;
+                var productPrice = document.getElementById('product_price').value;
+                var productDescription = document.getElementById('product_description').value;
+                var productStatus = document.getElementById('product_status').value;
+
+                this.action = "product/" + productId + "/" + productName + "/" + productAmount + "/" + productPrice + "/" + productDescription + "/" + productStatus;
+            });
+        </script>
     </div>
 </body>
 </html>

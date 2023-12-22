@@ -26,9 +26,21 @@ def add(name, amount, price, description, status):
     return index()
 
 
-@app.route('/edit')
-def edit():
-    return render_template('edit.html')
+@app.route('/edit/<string:id>')
+def edit(id):
+    controller.get(id, get_one="True")
+    return render_template('edit.html', product=controller.product)
+
+
+@app.route('/edit/product/<string:id>/<string:name>/<int:amount>/<float:price>/<string:description>/<string:status>', methods=['POST'])
+def edit_return(id, name, amount, price, description, status):
+    update = controller.put(id,
+                            {"name": name,
+                             "amount": amount,
+                             "price": price,
+                             "description": description,
+                             "status": status})
+    return index()
 
 
 @app.route('/details/<string:id>')
