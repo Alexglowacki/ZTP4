@@ -2,6 +2,10 @@ from flask import Flask
 from flask_restful import Api, Resource
 from flask import Response
 
+# from app.api import database_connection
+# from app.models import product_model
+# from app.api import database_operations
+
 from api import database_connection
 from models import product_model
 from api import database_operations
@@ -43,11 +47,11 @@ class ProductController(Resource):
         document = product_model.ProductModel.get_model()
         document["name"] = name
         document["amount"] = amount
-        document["price"] = price
+        document["price"] = float(price)
         document["description"] = description
         document["status"] = status
 
-        if price < 0.0:
+        if document["price"] < 0.0:
             return Response(status=400)
 
         try:
